@@ -1,18 +1,20 @@
 [build-system]
 requires = [
-    "setuptools==80.9.0",
+    "setuptools>=80.9.0",
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "docassemble.SNAP"
-version = "2025.02.01"
+version = "2026.0.3"
 description = "SNAP Calculator"
 readme = "README.md"
 authors = [
     { name = "Team effort", email = "rhahn@mlri.org" },
 ]
-dependencies = []
+dependencies = [
+    "docassemble.PovertyScale>=2024.0.0",
+]
 
 [project.urls]
 Homepage = "https://docassemble.org"

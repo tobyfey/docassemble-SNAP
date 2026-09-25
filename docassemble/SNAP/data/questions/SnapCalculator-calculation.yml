@@ -1,5 +1,7 @@
 ---
 code: |
+  from docassemble.PovertyScale.poverty import poverty_scale_get_income_limit
+
   # Set defaults for Conditionally hidden fields.
   if isHomeless == "Yes":  
     paysAC = "No"
@@ -24,11 +26,8 @@ code: |
   GMEI = round(MEI + WEIC + biWEIC, 0)  
   #2.3 Add up Unearned and Earned income
   TGMI = round(GMUI + GMEI - ChildSupport, 0)
-  # 200% poverty level/gross income test for HH
-  if HHSize <= 8:
-    TwoHundredPctPov = arrTwoHundredTable[HHSize-1]
-  else:            
-   TwoHundredPctPov = arrTwoHundredTable[7]+((HHSize-8)*arrTwoHundredTable[8])
+  # 200% poverty level/gross income test for HH (monthly, to match prior logic)
+  TwoHundredPctPov = poverty_scale_get_income_limit(HHSize, 2/12)
   # Does Asset test apply?
   if ElderlyOrDisabled == "Yes" and TGMI > TwoHundredPctPov:
     ApplyAssetTest = "Yes, assets must be <=" + currency(AssetTest_Threshold)
@@ -146,7 +145,7 @@ code: |
     if HHSize <= MINIMUM_SIZE_OF_HOUSEHOLD: 
       FinalResult = max(tempFinal, MINIMUM_GRANT)
     else:
-      FinalResult = tempFinal  
+      FinalResult = max(tempFinal, 0)  
   # Asset test message
   if ApplyNetAssetTest == "Yes" and FinalResult > 0:   
     AssetTestScreenMsg = "To get SNAP benefits, your assets must be " + currency(AssetTest_Threshold) + " or less.  See the SNAP Advocacy Guide <a href='https://www.masslegalservices.org/FoodStampSNAPAdvocacyGuide'>masslegalservices.org/FoodStampSNAPAdvocacyGuide</a> for more information."

@@ -1,25 +1,30 @@
 ---
 initial: True
 code: |
-  as_of_date = "Effective as of October 1, 2025"
+  as_of_date = "Effective as of October 1, 2026"
   calcDate = today()
   
   # Parameters needing (semi)annual updates
   PCT_TO_EARNED_INCOME_DED = 0.20
   MEDICAL_THRESHOLD = 35
-  SHELTER_DED_CAP = 744
-  HOMELESS_DED = 199
+  SHELTER_DED_CAP = 769
+  HOMELESS_DED = 206
   NET_INCOME_PCT = 0.30
   MINIMUM_SIZE_OF_HOUSEHOLD = 2
-  MINIMUM_GRANT = 24
-  PHONE = 64
-  NON_HEATING_UTILITY = 556
-  HEATING_UTILITY = 914
-  arrTwoHundredTable = [2608, 3525, 4442, 5358, 6275, 7192, 8108, 9025, 917]
-  arrStdDed = [209, 209, 209, 223, 261, 299]
+  MINIMUM_GRANT = 25
+  PHONE = 66
+  NON_HEATING_UTILITY = 575
+  HEATING_UTILITY = 945
+  arrStdDed = [217, 217, 217, 229, 268, 308]
   arrMaxAllowableNIC = [1305, 1763, 2221, 2680, 3138, 3596, 4055, 4513, 459]
-  arrMaxSNAPAllotment = [298, 546, 785, 994, 1183, 1421, 1571, 1789, 218]
+  arrMaxSNAPAllotment = [306, 562, 808, 1023, 1217, 1463, 1616, 1841, 225]
+  arrTwoHundredTable
   # Standard utility allowance - heating, non-heating, zero util, telephone
   arrStdUtilAllowance = [HEATING_UTILITY, NON_HEATING_UTILITY, 0.00, PHONE]
   # Asset test  
-  AssetTest_Threshold = 4500
+  AssetTest_Threshold = 4750
+---
+code: |
+  from docassemble.PovertyScale.poverty import poverty_scale_get_income_limit
+
+  arrTwoHundredTable = [poverty_scale_get_income_limit(i, 2/12)for i in range(1, 10)]

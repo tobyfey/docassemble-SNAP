@@ -6,6 +6,7 @@ metadata:
     MA SNAP Calculator
   description: |
     Massachusetts SNAP calculator is intended to be used by people familiar with the basic SNAP rules to estimate the monthly SNAP benefit amount a household may receive in Massachusetts. 
+  jurisdiction: NAM-US-US+MA
   exit url: https://www.masslegalservices.org/content/online-snap-calculator
   show login: False
 ---

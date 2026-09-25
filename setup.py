@@ -44,7 +44,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.SNAP',
-      version='2025.02.01',
+      version='2026.0.3',
       description=('SNAP Calculator'),
       long_description='Massachusetts SNAP Online Calculator. \r\n\r\nIt is intended to be used by people familiar with the basic SNAP rules to estimate the monthly SNAP benefit amount a household may receive in Massachusetts. \r\n\r\n#Authors:\r\nRochelle Hahn\r\nPat Baker\r\nVictoria Negus\r\nPurple Sky',
       long_description_content_type='text/markdown',
@@ -53,7 +53,7 @@ setup(name='docassemble.SNAP',
       license='',
       url='https://docassemble.org',
       packages=find_namespace_packages(),
-      install_requires=[],
+      install_requires=['docassemble.PovertyScale>=2024.0.0'],
       zip_safe=False,
       package_data=find_package_data(where='docassemble/SNAP/', package='docassemble.SNAP'),
      )
